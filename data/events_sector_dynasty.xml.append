@@ -1,0 +1,84 @@
+
+
+<mod:findName type="event" name="DYNASTY_ROCK_HERESY">
+	<!--Active Check-->
+	<mod-append:choice req="pilot" lvl="1" max_group="641" blue="true" hidden="true">
+		<text>mde_active_1</text>
+		<event name="DP_DYNASTY_ROCK_HERESY_SUCCESS">
+            <crewMember amount="1" class="rock_crusader"/>
+			<text>If you can't reason heretics to your side, you're going to have a hard time making converts.  You should take this as an oppertunity to strengthen your evangelical strategies and articulate the undeniable truths of your religion.
+                
+"You are surprisingly well-spoken for a renegade.  Very well.  I will join you, and test my theology against the many heretics I am sure to encounter."
+            </text>
+            <choice>
+                <text>Continue...</text>
+				<event />
+            </choice>
+		</event>
+	</mod-append:choice>
+	<mod-append:choice req="pilot" lvl="1" max_group="642" blue="false" hidden="true">
+		<text>mde_active_1</text>
+		<event name="DP_DYNASTY_ROCK_HERESY_FAILURE">
+            <ship hostile="true" />
+			<text>Well, ok, but have you tried heresy?  It's pretty cool, actually.
+
+The rock stares at you.  "I am stupider for hearing that.  I will be doing the universe a favor by removing you from it."
+            </text>
+            <choice>
+                <text>Continue...</text>
+				<event load="COMBAT_CHECK" />
+            </choice>
+		</event>
+	</mod-append:choice>
+</mod:findName>
+
+
+<event name="DP_NEBULA_DYNASTY_FILTH_FIRE">
+    <text>That...  Seems like a bad idea.</text>
+    <choice>
+        <text>Exit your mindscape.</text>
+        <event>
+            <loadEvent>NEBULA_DYNASTY_FILTH</loadEvent>
+        </event>
+    </choice>
+</event>
+
+<event name="DP_NEBULA_DYNASTY_FILTH_OPTIONS">
+    <text>You ponder with your internal parts on how best to cleanse the filth.</text>
+    <choice req="pilot" lvl="1" max_group="642" hidden="true">
+        <text>mde_passive_1</text>
+        <event load="DP_NEBULA_DYNASTY_FILTH_FIRE"/>
+    </choice>
+    <choice req="pilot" lvl="1" max_group="643" hidden="true">
+        <text>mde_passive_2</text>
+        <event load="OPTION_INVALID"/>
+    </choice>
+    <choice>
+        <text>Hmmm.</text>
+        <event>
+            <loadEvent>NEBULA_DYNASTY_FILTH</loadEvent>
+        </event>
+    </choice>
+</event>
+
+<event name="DP_NEBULA_DYNASTY_FILTH_1">
+    <text>This area... It's crawling, it's disgusting, it's *filthy*.  It cries out to be cleansed.</text>
+    <choice>
+        <text>How can I cleanse it?</text>
+        <event load="DP_NEBULA_DYNASTY_FILTH_OPTIONS"/>
+    </choice>
+    <choice>
+        <text>That sounds like somebody else's problem.</text>
+        <event>
+            <loadEvent>NEBULA_DYNASTY_FILTH</loadEvent>
+        </event>
+    </choice>
+</event>
+
+<mod:findName type="event" name="NEBULA_DYNASTY_FILTH">
+	<!--Active Check-->
+	<mod-append:choice req="pilot" lvl="1" max_group="641" hidden="true">
+		<text>mde_passive_1</text>
+        <event load="DP_NEBULA_DYNASTY_FILTH_1"/>
+	</mod-append:choice>
+</mod:findName>

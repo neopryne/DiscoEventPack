@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--All appends for a given event must have different max_groups.  FM is 620-ish, I claim 640-649.-->
+<mod:findName type="event" name="DROPPOINT_CRAZYZOLTAN">
+	<!--Passive Check-->
+	<mod-append:choice req="pilot" lvl="1" max_group="640" hidden="true">
+		<text>mde_passive_1</text>
+		<event load="OPTION_INVALID"/>
+	</mod-append:choice>
+</mod:findName>
+
+<event name="DP_DISTRESS_DROPPOINT_ZOLTAN_FUEL_ATTEMPT">
+	<text>You dump the contents of a fuel cell into the catalyst container and pray, but nothing seems to happen.  "Interesting approach," the zoltan says, "Unfortunately, it does not appear to work."</text>
+	<item_modify>
+		<item type="fuel" min="-1" max="-1" />
+	</item_modify>
+	<choice hidden="true">
+		<text>...</text>
+		<event>
+			<loadEvent>DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS</loadEvent>
+		</event>
+	</choice>
+</event>
+
+<event name="DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS">
+	<text>You pretend you know what you're doing, banging around on the shielding equipment while thinking out loud troubleshooting steps for the objects facing you.  Bumber. Spookifier. Plasm pulse pump.  All names you made up just now and are hoping it passes for competence. As you perform your mechanical improv, you find yourself coming to an intuitive understanding of it.  It seems like it requires some kind of catalyst to function properly, and there's no sign of whatever used to be there.  You ponder your options...</text>
+	<choice req="pilot" lvl="1" max_group="643" blue="true" hidden="true">
+		<text>mde_passive_1</text>
+		<event load="OPTION_INVALID"/>
+	</choice>
+	<choice hidden="true">
+		<text>Missiles.</text>
+		<event>
+			<text>You crack open a warhead with your teeth and pour it out into the catalyst container.  Nothing happens for several tense moments, and then the shields snap to life!  The zoltans are very grateful and shocked that you actually pulled it off, giving you some scrap for your troubles.</text>
+			<autoReward level="MED">standard</autoReward>
+			<item_modify>
+				<item type="missiles" min="-1" max="-1" />
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text>Fuel.</text>
+		<event load="DP_DISTRESS_DROPPOINT_ZOLTAN_FUEL_ATTEMPT"/>
+	</choice>
+	<choice>
+		<text>I'm not doing this.</text>
+		<event>
+			<text>You tell the zoltans you can't help them.
+			
+			"We understand, thank you for trying."
+			</text>
+		</event>
+	</choice>
+</event>
+
+<mod:findName type="event" name="DISTRESS_DROPPOINT_ZOLTAN">
+	<!--Active Check-->
+	<mod-append:choice req="pilot" lvl="1" max_group="641" blue="true" hidden="true">
+		<text>mde_active_1</text>
+		<event load="DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS"/>
+	</mod-append:choice>
+	<mod-append:choice req="pilot" lvl="1" max_group="642" blue="false" hidden="true">
+		<text>mde_active_1</text>
+		<event name="DP_DISTRESS_DROPPOINT_ZOLTAN_FAILURE">
+			<text>You pretend you know what you're doing, banging around on the shielding equipment while thinking out loud troubleshooting steps for the objects facing you.  Bumber. Spookifier. Plasm pulse pump.  All names you made up just now and are hoping it passes for competence.  Eventually you manage to dislodge a high pressure part that flies into the machinery, causing untold damage and ruining the shields for good.  The zoltans are furious, but they can't very well do anything about it with broken shields.</text>
+		</event>
+	</mod-append:choice>
+</mod:findName>
