@@ -22,11 +22,12 @@ local function appendEvents()
 
     local distressZoltan = mde.buildEvent("DISTRESS_DROPPOINT_ZOLTAN")
     table.insert(distressZoltan, mde.buildActiveCheck(dvsd.s_interfacing.internalName, 12, "mde_active_1", "I can do this. How hard could alien energy shield repair be?",
-            "DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS", "DP_DISTRESS_DROPPOINT_ZOLTAN_FAILURE"))
+            "DP_DISTRESS_DROPPOINT_ZOLTAN_MIDDLE", "DP_DISTRESS_DROPPOINT_ZOLTAN_FAILURE"))
     table.insert(eventList, distressZoltan)
 
     local distressZoltan2 = mde.buildEvent("DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS")
-    table.insert(distressZoltan2, mde.buildPassiveCheck(dvsd.s_electrochemistry.internalName, 11, "mde_passive_1", "'This ship wants _missiles_.'"))
+    --table.insert(distressZoltan2, mde.buildPassiveCheck(dvsd.s_electrochemistry.internalName, 11, "mde_passive_1", "'This ship wants _missiles_.'"))
+    table.insert(distressZoltan2, mde.buildPassiveCheck(dvsd.s_electrochemistry.internalName, 10, "mde_passive_1", "'This ship wants _missiles_.'"))
     table.insert(eventList, distressZoltan2)
 
     local rockHeresy = mde.buildEvent("DYNASTY_ROCK_HERESY")

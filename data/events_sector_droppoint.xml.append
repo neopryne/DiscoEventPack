@@ -23,7 +23,7 @@
 </event>
 
 <event name="DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS">
-	<text>You pretend you know what you're doing, banging around on the shielding equipment while thinking out loud troubleshooting steps for the objects facing you.  Bumber. Spookifier. Plasm pulse pump.  All names you made up just now and are hoping it passes for competence. As you perform your mechanical improv, you find yourself coming to an intuitive understanding of it.  It seems like it requires some kind of catalyst to function properly, and there's no sign of whatever used to be there.  You ponder your options...</text>
+	<text>As you perform your mechanical improv, you find yourself coming to an intuitive understanding of it.  It seems like it requires some kind of catalyst to function properly, and there's no sign of whatever used to be there.  You ponder your options...</text>
 	<choice req="pilot" lvl="1" max_group="643" blue="true" hidden="true">
 		<text>mde_passive_1</text>
 		<event load="OPTION_INVALID"/>
@@ -53,11 +53,18 @@
 	</choice>
 </event>
 
+
 <mod:findName type="event" name="DISTRESS_DROPPOINT_ZOLTAN">
 	<!--Active Check-->
 	<mod-append:choice req="pilot" lvl="1" max_group="641" blue="true" hidden="true">
 		<text>mde_active_1</text>
-		<event load="DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS"/>
+		<event name="DP_DISTRESS_DROPPOINT_ZOLTAN_MIDDLE">
+			<text>You pretend you know what you're doing, banging around on the shielding equipment while thinking out loud troubleshooting steps for the objects facing you.  Bumber. Spookifier. Plasm pulse pump.  All names you made up just now and are hoping it passes for competence.</text>
+			<choice req="pilot" lvl="1" blue="false">
+				<text>Continue...</text>
+				<event load="DP_DISTRESS_DROPPOINT_ZOLTAN_SUCCESS"/>
+			</choice>
+		</event>
 	</mod-append:choice>
 	<mod-append:choice req="pilot" lvl="1" max_group="642" blue="false" hidden="true">
 		<text>mde_active_1</text>
